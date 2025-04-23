@@ -1,24 +1,23 @@
-FROM python:3.10-alpine
+FROM python:3.12-slim-bookworm AS build
 
 WORKDIR /app
-
-# Install build tools dan dependencies
-RUN apk add --no-cache \
-    build-base \
-    libffi-dev \
-    openblas-dev \
-    gfortran \
-    musl-dev \
-    linux-headers \
-    jpeg-dev \
-    zlib-dev
-
-# Install python packages
 COPY requirement.txt .
-RUN pip install --upgrade pip && \
-    pip install --prefer-binary -r requirement.txt
 
-# Copy project files
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libatlas-base-dev \
+    libopenblas-dev \
+    gfortran \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir --prefer-binary -r requirement.txt
+
+# Stage final
+FROM python:3.12-slim-bookworm
+
+WORKDIR /app
+COPY --from=build /app /app
 COPY . .
 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
