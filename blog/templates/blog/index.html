@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Kelompok 9</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <div class="dashboard">
+      <div class="price-card">
+        <div class="label">Price</div>
+        <div class="value">USD {{ harga }}</div>
+        <div class="change">–Durung</div>
+        <div class="chart-placeholder"></div>
+      </div>
+  
+      <div class="prediction">
+        <h2>Prediction</h2>
+        <div class="prediction-card">
+          <div class="header">
+            <div class="icon">฿</div>
+            <div class="details">
+              <div class="symbol">BTC</div>
+              <div class="price">USD {{ predict }}</div>
+              <div class="trend">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M5 13l4 4L19 7"></path>
+                </svg> 
+                <div id="trendIndicator">{{ trend }} </div>
+              </div>
+              <div class="date">(Prediksi hanya menggunakan data harga historis)</div>
+            </div>
+          </div>
+          <div class="chart">
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const initialPriceFromTemplate = "{{ initialPrice }}";
+      const predictedPriceFromTemplate = "{{ predict }}";
+      const updatedPriceFromTemplate = "{{ harga }}"
+  </script>
+  <script src="{% static 'js/script.js' %}"></script>
+</html>
