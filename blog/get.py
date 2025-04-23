@@ -2,8 +2,8 @@ from binance import Client, ThreadedWebsocketManager
 import time
 import pandas as pd
 
-api_key = "AbdA9V5CxGWEpFPFG8hbcYevMrOnpOORxa54QbZmiZkfaAwthmunpYskAnd5gYRV"
-secret_key = "oMy0kwkxPBsl1Z4pey8pdcWLPeah5ASIrXugAT8UO99dVZ34WnymQmKj4Yci5QDe8c"
+api_key = "YOUR_API_KEY"
+secret_key = "SECRET_KEY"
 
 client = Client(api_key, secret_key)
 klines = client.get_klines(symbol='BTCUSDT', interval=Client.KLINE_INTERVAL_1MINUTE, limit=100)
